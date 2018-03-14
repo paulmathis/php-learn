@@ -11,10 +11,28 @@ class QueryBuilder
 
     public function selectAll($table)
     {
-        $statement = $this->pdo->prepare("select * from {$table}");
+        $statement = $this->pdo->prepare("SELECT * FROM {$table}");
 
         $statement->execute();
     
         return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
+    public function insert($table, $parameters)
+    {
+        $sql = sprintf(
+            'INSERT INTO %s (%s) values (%s)',
+            $table,
+            implode(' ,', array_keys($parameters)),
+            ':' . implode(', :', array_keys($parameters))
+        );
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+
+            $statement->execute($parameters);
+        } catch (Exception $e) {
+            die('Whoops, something went wrong.');
+        }
     }
 }
