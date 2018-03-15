@@ -1,6 +1,8 @@
 <?php require('partials/head.php'); ?>
 
-  <ul>
+<h1>Home Page</h1>
+
+  <!-- <ul>
     <?php foreach ($users as $user) : ?>
       <li><?= $user->name; ?></li>
     <?php endforeach ?>
@@ -11,6 +13,6 @@
   <form action="/names" method="POST">
     <input type="text" name="name">
     <button type="submit">Submit</button>
-  </form>
+  </form> -->
 
 <?php require('partials/footer.php');
